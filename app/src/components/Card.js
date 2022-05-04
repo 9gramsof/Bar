@@ -72,9 +72,9 @@ export default function DrinkCard({drink}) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Instructions:</Typography>
-          <Typography paragraph>{drink.instructions}</Typography>
-          <Typography paragraph>Ingredients:</Typography>
-          <Typography paragraph>
+          <Typography paragraph align="justify">{drink.instructions}</Typography>
+          <Typography paragraph >Ingredients:</Typography>
+          <Typography paragraph align="left">
             {drink.ingredients.map((item, i) => {
               return <li key={i}>{item}</li>})}
           </Typography>

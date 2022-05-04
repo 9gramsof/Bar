@@ -20,9 +20,11 @@ const App = () => {
   if (value === "List") {
     display = <List/>
   } else if (value === "Home") {
-    display = ''
+    display = <img src={cocktail} className="App-logo" alt="logo" />
   } else if (value === "Filter") {
     display = <Filter/>
+  } else if (value === "Random") {
+    display = <Random/>
   } else if (value === "Search") {
     display = <Search/>
   }
@@ -30,7 +32,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>HomeBar</h1>
-      <Random/>
+
       <Box className="nav" sx={{ width: '100%' }}>
         <Tabs
           value={value}
@@ -43,11 +45,11 @@ const App = () => {
           <Tab value="Search" label="Search" />
           <Tab value="Filter" label="Filter" />
           <Tab value="List" label="List" />
+          <Tab value="Random" label="Random" />
         </Tabs>
+
       </Box>
       {display}
-      {/* <img src={cocktail} className="App-logo" alt="logo" /> */}
-
     </div>
   )
 

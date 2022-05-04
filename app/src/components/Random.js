@@ -11,6 +11,7 @@ class Random extends React.Component {
       showCard: false,
       drink: {
         name: '',
+        id: 0,
         category: '',
         glass: '',
         image: '',
@@ -28,30 +29,44 @@ class Random extends React.Component {
     axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
     .then((res) => {
       let drink = res.data.drinks[0];
+
+      let resultIngredients = {
+        [drink.strIngredient1]: drink.strMeasure1,
+        [drink.strIngredient2]: drink.strMeasure2,
+        [drink.strIngredient3]: drink.strMeasure3,
+        [drink.strIngredient4]: drink.strMeasure4,
+        [drink.strIngredient5]: drink.strMeasure5,
+        [drink.strIngredient6]: drink.strMeasure6,
+        [drink.strIngredient7]: drink.strMeasure7,
+        [drink.strIngredient8]: drink.strMeasure8,
+        [drink.strIngredient9]: drink.strMeasure9,
+        [drink.strIngredient10]: drink.strMeasure10,
+        [drink.strIngredient11]: drink.strMeasure11,
+        [drink.strIngredient12]: drink.strMeasure12,
+        [drink.strIngredient13]: drink.strMeasure13,
+        [drink.strIngredient14]: drink.strMeasure14,
+        [drink.strIngredient15]: drink.strMeasure15
+      }
+
+      resultIngredients = Object.entries(resultIngredients).map(([key, value]) => {
+        if (key !== "null") {
+          if (value !== undefined && value !== null && value !== "null") {
+            return (value + key)
+          } else {
+            return (key)
+          }
+        }
+      }).filter(x => { return x !== undefined})
+
       let RandomDrink = {
         name: drink.strDrink,
+        id: drink.idDrink,
         category: drink.strCategory,
         glass: drink.strGlass,
         image: drink.strDrinkThumb,
         instructions: drink.strInstructions,
         alcoholic: drink.strAlcoholic,
-        ingredients: [
-          drink.strIngredient1 + ', ' + drink.strMeasure1,
-          drink.strIngredient2 + ', ' + drink.strMeasure2,
-          drink.strIngredient3 + ', ' + drink.strMeasure3,
-          drink.strIngredient4 + ', ' + drink.strMeasure4,
-          drink.strIngredient5 + ', ' + drink.strMeasure5,
-          drink.strIngredient6 + ', ' + drink.strMeasure6,
-          drink.strIngredient7 + ', ' + drink.strMeasure7,
-          drink.strIngredient8 + ', ' + drink.strMeasure8,
-          drink.strIngredient9 + ', ' + drink.strMeasure9,
-          drink.strIngredient10 + ', ' + drink.strMeasure10,
-          drink.strIngredient11 + ', ' + drink.strMeasure11,
-          drink.strIngredient12 + ', ' + drink.strMeasure12,
-          drink.strIngredient13 + ', ' + drink.strMeasure13,
-          drink.strIngredient14 + ', ' + drink.strMeasure14,
-          drink.strIngredient15 + ', ' + drink.strMeasure15
-        ]
+        ingredients: resultIngredients
       }
       console.log(RandomDrink);
       this.setState({
