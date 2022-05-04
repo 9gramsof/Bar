@@ -74,7 +74,7 @@ class Random extends React.Component {
       <Box sx={{display: 'flex', flexDirection: 'column', "justify-content": 'center'}} >
         <Box>Click me for a random drink!</Box>
         <Box><LocalBarIcon sx={{ fontSize: 100 }} className="Random" onClick={this.handleClick}/></Box>
-        <Box>{RandomDrink}</Box>
+        <Box sx={{display: 'flex', flexDirection: 'row', "justify-content": 'center'}}>{RandomDrink}</Box>
       </Box>
     )
   }

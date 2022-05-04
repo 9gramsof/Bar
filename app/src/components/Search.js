@@ -77,7 +77,7 @@ const Search = () => {
       <Button type="submit">Go!</Button>
     </Box>
 
-    <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8 }}>{display}</Box>
+    <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, "justify-content": 'center' }}>{display}</Box>
     </Box>
   )
 }

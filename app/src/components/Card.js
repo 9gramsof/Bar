@@ -33,7 +33,7 @@ export default function DrinkCard({drink}) {
   };
 
   return (
-    <Card sx={{ maxWidth: 300, display: 'block' }}>
+    <Card sx={{ width: 300, display: 'flex', flexDirection: 'column'}}>
       <CardHeader
         avatar={
           <LocalBarIcon sx={{ fontSize: 20 }} aria-label="recipe">
