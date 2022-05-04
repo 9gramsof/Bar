@@ -13,6 +13,7 @@
   pointer-events: none;
 }
 
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -23,6 +24,11 @@
   .Random {
     animation: Random-spin  0.5s linear;
   }
+
+}
+.Random:hover {
+  transform: scale(1.2,1.2);
+  cursor: pointer;
 }
 
 .App-header {

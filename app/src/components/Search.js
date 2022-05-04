@@ -4,11 +4,21 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import DrinkCard from './Card.js';
+// import ButtonGroup from '@mui/material/ButtonGroup';
+
 const Search = () => {
 
   const [name, setName] = useState('');
   const [drinks, setDrinks] = useState([]);
   const [showCards, setShowCards] = useState(false);
+  // const [searchBy, setSearchBy] = useState('');
+  // const [searchOrFilter, setSearchOrFilter] = useState('');
+
+  //www.thecocktaildb.com/api/json/v1/1/filter.php?i=Orange
+  //the baove API gives you a list of drinks with name, img, and id.
+  //this gives you the search by ingredient - display the little tiles
+  //on click of each tile, it should make a card on the right side
+  //tomorrow - also do the db for favorite drinks
 
   function handleSearch(event) {
     event.preventDefault();
@@ -67,15 +77,20 @@ const Search = () => {
       noValidate
       autoComplete="off"
       onSubmit={handleSearch}>
+         {/* <ButtonGroup variant="text" aria-label="text button group" >
+          <Button onClick={e => setSearchBy('s')} value="s">Name</Button>
+          <Button onClick={e => setSearchBy('i')} value="i">Ingredient</Button>
+        </ButtonGroup> */}
       <TextField
       id="standard-basic"
-      label="Search by name"
+      label="Search"
       variant="standard"
       value={name}
       onInput={e => setName(e.target.value)}
       />
       <Button type="submit">Go!</Button>
     </Box>
+
 
     <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, "justify-content": 'center' }}>{display}</Box>
     </Box>
