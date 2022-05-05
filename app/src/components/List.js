@@ -22,7 +22,7 @@ class List extends React.Component {
     .then((res) => {
       console.log(res.data.drinks)
       let arr = res.data.drinks.map(obj => Object.values(obj).toString())
-      console.log(arr);
+      // console.log(arr);
       this.setState({
         isSelected: true,
         list: arr
@@ -57,7 +57,7 @@ class List extends React.Component {
           <Button onClick={this.handleClick} value="c">Category</Button>
           <Button onClick={this.handleClick} value="g">Glass</Button>
           <Button onClick={this.handleClick} value="i">Ingredients</Button>
-          <Button onClick={this.handleClick} value="a">Alcoholic</Button>
+          {/* <Button onClick={this.handleClick} value="a">Alcoholic</Button> */}
         </ButtonGroup>
         {display}
       </Box>

@@ -55,7 +55,7 @@ const App = () => {
       </Box>
     )
   } else if (value === "Filter") {
-    display = <Filter/>
+    display = <Filter />
   } else if (value === "Home") {
     display = <Random/>
   } else if (value === "Search") {

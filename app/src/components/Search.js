@@ -17,12 +17,6 @@ const Search = () => {
   // const [searchBy, setSearchBy] = useState('');
   // const [searchOrFilter, setSearchOrFilter] = useState('');
 
-  //www.thecocktaildb.com/api/json/v1/1/filter.php?i=Orange
-  //the baove API gives you a list of drinks with name, img, and id.
-  //this gives you the search by ingredient - display the little tiles
-  //on click of each tile, it should make a card on the right side
-  //tomorrow - also do the db for favorite drinks
-
   function handleSearch(event) {
     event.preventDefault();
     // console.log(name);

@@ -54,8 +54,8 @@ export default function DrinkCard({drink, getfavorites}) {
       }
     })
     .then((res) => {
-      console.log(res.data);
-      getfavorites();
+      // console.log(res.data);
+      getfavorites;
 
     })
     .catch((err) => {

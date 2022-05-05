@@ -9,6 +9,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 const axios = require("axios");
 import SmallCard from './SmallCard.js';
+import DrinkCard from './Card.js';
 
 export default function Filter() {
   const [filter, setFilter] = useState('');
@@ -16,6 +17,8 @@ export default function Filter() {
   const [open, setOpen] = useState(false);
   const [go, setGo] = useState(false);
   const [drinkList, setDrinkList] = useState([]);
+  const [displayDrinkCard, setDisplayDrinkCard] = useState(false);
+  const [drink, setDrink] = useState({});
 
   const handleChange = (event) => {
     setFilter(event.target.value);
@@ -29,12 +32,18 @@ export default function Filter() {
   const handleGo = (event) => {
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?${filter}=${search}`)
     .then((res) => {
-      console.log(res.data.drinks);
+      // console.log(res.data.drinks);
       setDrinkList(res.data.drinks);
     })
     .catch((err) => {
       console.log(err)
     })
+  }
+
+  const getCard = (selectedDrink) => {
+    setDisplayDrinkCard(true);
+    setDrink(selectedDrink);
+    console.log('WAS PROPERLY PASSED UP', selectedDrink)
   }
 
   const handleClose = () => {
@@ -91,8 +100,13 @@ export default function Filter() {
   let displayDrinksList;
   if (drinkList.length > 0) {
     displayDrinksList = drinkList.map((drink, i) => {
-      return (<SmallCard key={i} drink={drink}/>)
+      return (<SmallCard key={i} drink={drink} getCard={getCard}/>)
     })
+  }
+
+  let displaySelectedCard;
+  if (displayDrinkCard) {
+    displaySelectedCard = <DrinkCard drink={drink}/>
   }
 
   return (
@@ -112,9 +126,13 @@ export default function Filter() {
       {displayAutoComplete}
       </Box>
       <Box>{displayGo}</Box>
+      <Box>
+        {displaySelectedCard}
+      </Box>
       <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, justifyContent: 'center' }}>
         {displayDrinksList}
-        </Box>
+       </Box>
+
     </Box>
   );
 }

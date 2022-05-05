@@ -95,7 +95,7 @@ class Random extends React.Component {
           </Box>
         <Box className="Random" onClick={this.handleClick} >
         <img src={cocktail}/>
-          </Box>
+        </Box>
         <Box sx={{display: 'flex', flexDirection: 'row', "justify-content": 'center'}}>{RandomDrink}</Box>
       </Box>
     )
