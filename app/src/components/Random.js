@@ -3,7 +3,8 @@ import LocalBarIcon from '@mui/icons-material/LocalBar';
 import Box from '@mui/material/Box';
 import DrinkCard from './Card.js';
 const axios = require("axios");
-
+import cocktail from '../pics/cocktail.svg';
+import Typography from '@mui/material/Typography';
 class Random extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,7 @@ class Random extends React.Component {
         image: '',
         instructions: '',
         alcoholic: '',
+        favorite: false,
         ingredients: []
       }
     }
@@ -24,7 +26,7 @@ class Random extends React.Component {
   }
 
   handleClick(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
     .then((res) => {
@@ -62,13 +64,14 @@ class Random extends React.Component {
         name: drink.strDrink,
         id: drink.idDrink,
         category: drink.strCategory,
+        favorite: false,
         glass: drink.strGlass,
         image: drink.strDrinkThumb,
         instructions: drink.strInstructions,
         alcoholic: drink.strAlcoholic,
         ingredients: resultIngredients
       }
-      console.log(RandomDrink);
+      // console.log(RandomDrink);
       this.setState({
         showCard: true,
         drink: RandomDrink
@@ -86,9 +89,13 @@ class Random extends React.Component {
     }
 
     return (
-      <Box sx={{display: 'flex', flexDirection: 'column', "justify-content": 'center'}} >
-        <Box>Click me for a random drink!</Box>
-        <Box><LocalBarIcon sx={{ fontSize: 100 }} className="Random" onClick={this.handleClick}/></Box>
+      <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 2 }} >
+        <Box>
+        <Typography variant='h6'>Click me for a random drink!</Typography>
+          </Box>
+        <Box className="Random" onClick={this.handleClick} >
+        <img src={cocktail}/>
+          </Box>
         <Box sx={{display: 'flex', flexDirection: 'row', "justify-content": 'center'}}>{RandomDrink}</Box>
       </Box>
     )

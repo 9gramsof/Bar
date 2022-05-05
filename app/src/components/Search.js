@@ -7,6 +7,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import DrinkCard from './Card.js';
 // import ButtonGroup from '@mui/material/ButtonGroup';
+import SmallCard from './SmallCard.js';
 
 const Search = () => {
 
@@ -24,7 +25,7 @@ const Search = () => {
 
   function handleSearch(event) {
     event.preventDefault();
-    console.log(name);
+    // console.log(name);
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
     .then((res) => {
       // console.log(res.data.drinks);
@@ -57,9 +58,12 @@ const Search = () => {
           }
         }).filter(x => { return x !== undefined})
 
+        // console.log(resultIngredients);
+
         return ({name: drink.strDrink,
           id: drink.idDrink,
           category: drink.strCategory,
+          favorite: false,
           glass: drink.strGlass,
           image: drink.strDrinkThumb,
           instructions: drink.strInstructions,
@@ -106,7 +110,8 @@ const Search = () => {
       />
       <Button type="submit">Go!</Button>
     </Box>
-    <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, "justify-content": 'center' }}>{display}</Box>
+    <SmallCard/>
+    <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, justifyContent: 'center' }}>{display}</Box>
     </Box>
   )
 }

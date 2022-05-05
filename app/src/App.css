@@ -8,28 +8,29 @@
   margin-bottom: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
+.Random img {
+  height: 10vmin;
   pointer-events: none;
 }
 
+.Random:hover img {
+  transform: scale(1.2,1.2);
+  cursor: pointer;
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .Random {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .Random {
+  .App-logo {
     animation: Random-spin  0.5s linear;
   }
+}
 
-}
-.Random:hover {
-  transform: scale(1.2,1.2);
-  cursor: pointer;
-}
+
 
 .App-header {
   background-color: #282c34;
