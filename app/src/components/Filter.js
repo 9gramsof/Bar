@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,14 +7,35 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
+const axios = require("axios");
+import SmallCard from './SmallCard.js';
 
 export default function Filter() {
-  const [filter, setFilter] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [filter, setFilter] = useState('');
+  const [search, setSearch] = useState('');
+  const [open, setOpen] = useState(false);
+  const [go, setGo] = useState(false);
+  const [drinkList, setDrinkList] = useState([]);
 
   const handleChange = (event) => {
     setFilter(event.target.value);
   };
+
+  const handleSearch = (event) => {
+    setSearch(Object.values(event.target)[0].key);
+    setGo(!go);
+  }
+
+  const handleGo = (event) => {
+    axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?${filter}=${search}`)
+    .then((res) => {
+      console.log(res.data.drinks);
+      setDrinkList(res.data.drinks);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -24,216 +45,76 @@ export default function Filter() {
     setOpen(true);
   };
 
-  const category = [{label: "Ordinary Drink"}, {label: "Cocktail"}, {label: "Shake"}, {label: "Other/Unknown"}, {label: "Cocoa"}, {label: "Shot"}, {label: "Coffee / Tea"}, {label: "Homemade Liqueur"}, {label: "Punch / Party Drink"}, {label: "Beer"}, {label: "Soft Drink"}
+  const category = ["Ordinary Drink","Cocktail","Shake","Other/Unknown","Cocoa","Shot","Coffee / Tea","Homemade Liqueur","Punch / Party Drink","Beer","Soft Drink"]
+
+  const ingredient = [
+    "Light rum","Applejack","Gin","Dark rum","Sweet Vermouth","Strawberry schnapps","Scotch","Apricot brandy","Triple sec","Southern Comfort","Orange bitters", "Brandy","Lemon vodka","Blended whiskey","Dry Vermouth", "Amaretto" ,"Tea","Champagne","Coffee liqueur","Bourbon","Tequila", "Vodka","Añejo rum","Bitters","Sugar","Kahlua","demerara Sugar","Dubonnet Rouge","Watermelon","Lime juice","Irish whiskey","Apple brandy","Carbonated water","Cherry brandy","Creme de Cacao", "Grenadine","Port","Coffee brandy","Red wine","Rum", "Grapefruit juice","Ricard","Sherry","Cognac","Sloe gin", "Apple juice","Pineapple juice","Lemon juice","Sugar syrup","Milk","Strawberries", "Chocolate syrup","Yoghurt","Mango","Ginger","Lime","Cantaloupe","Berries","Grapes", "Kiwi","Tomato juice","Cocoa powder","Chocolate","Heavy cream","Galliano","Peach Vodka","Ouzo", "Coffee","Spiced rum","Water","Espresso","Angelica root","Orange", "Cranberries","Johnnie Walker","Apple cider","Everclear","Cranberry juice","Egg yolk", "Egg","Grape juice","Peach nectar","Lemon","Firewater","Lemonade", "Lager","Whiskey","Absolut Citron","Pisco","Irish cream","Ale", "Chocolate liqueur","Midori melon liqueur","Sambuca","Cider", "Sprite","7-Up","Blackberry brandy","Peppermint schnapps","Creme de Cassis"
   ]
 
-  const igredient = [
-    {label: "Light rum"}, {label: "Applejack"},
-    {label: "Gin"}, {label: "Dark rum"},
-    {label: "Sweet Vermouth"},
-    {label: "Strawberry schnapps"},
-    {label: "Scotch"},
-    {label: "Apricot brandy"},
-    {label: "Triple sec"},
-    {label: "Southern Comfort"},
-    {label: "Orange bitters"},
-    {label: "Brandy"},
-    {label: "Lemon vodka"},
-    {label: "Blended whiskey"
-    },
-    {label: "Dry Vermouth"
-    },
-    {label: "Amaretto"
-    },
-    {label: "Tea"
-    },
-    {label: "Champagne"
-    },
-    {label: "Coffee liqueur"
-    },
-    {label: "Bourbon"
-    },
-    {label: "Tequila"
-    },
-    {label: "Vodka"
-    },
-    {label: "Añejo rum"
-    },
-    {label: "Bitters"
-    },
-    {label: "Sugar"
-    },
-    {label: "Kahlua"
-    },
-    {label: "demerara Sugar"
-    },
-    {label: "Dubonnet Rouge"
-    },
-    {label: "Watermelon"
-    },
-    {label: "Lime juice"
-    },
-    {label: "Irish whiskey"
-    },
-    {label: "Apple brandy"
-    },
-    {label: "Carbonated water"
-    },
-    {label: "Cherry brandy"
-    },
-    {label: "Creme de Cacao"
-    },
-    {label: "Grenadine"
-    },
-    {label: "Port"
-    },
-    {label: "Coffee brandy"
-    },
-    {label: "Red wine"
-    },
-    {label: "Rum"
-    },
-    {label: "Grapefruit juice"
-    },
-    {label: "Ricard"
-    },
-    {label: "Sherry"
-    },
-    {label: "Cognac"
-    },
-    {label: "Sloe gin"
-    },
-    {label: "Apple juice"
-    },
-    {label: "Pineapple juice"
-    },
-    {label: "Lemon juice"
-    },
-    {label: "Sugar syrup"
-    },
-    {label: "Milk"
-    },
-    {label: "Strawberries"
-    },
-    {label: "Chocolate syrup"
-    },
-    {label: "Yoghurt"
-    },
-    {label: "Mango"
-    },
-    {label: "Ginger"
-    },
-    {label: "Lime"
-    },
-    {label: "Cantaloupe"
-    },
-    {label: "Berries"
-    },
-    {label: "Grapes"
-    },
-    {label: "Kiwi"
-    },
-    {label: "Tomato juice"
-    },
-    {label: "Cocoa powder"
-    },
-    {label: "Chocolate"
-    },
-    {label: "Heavy cream"
-    },
-    {label: "Galliano"
-    },
-    {label: "Peach Vodka"
-    },
-    {label: "Ouzo"
-    },
-    {label: "Coffee"
-    },
-    {label: "Spiced rum"
-    },
-    {label: "Water"
-    },
-    {label: "Espresso"
-    },
-    {label: "Angelica root"
-    },
-    {label: "Orange"
-    },
-    {label: "Cranberries"
-    },
-    {label: "Johnnie Walker"
-    },
-    {label: "Apple cider"
-    },
-    {label: "Everclear"
-    },
-    {label: "Cranberry juice"
-    },
-    {label: "Egg yolk"
-    },
-    {label: "Egg"
-    },
-    {label: "Grape juice"
-    },
-    {label: "Peach nectar"
-    },
-    {label: "Lemon"
-    },
-    {label: "Firewater"
-    },
-    {label: "Lemonade"
-    },
-    {label: "Lager"
-    },
-    {label: "Whiskey"
-    },
-    {label: "Absolut Citron"
-    },
-    {label: "Pisco"
-    },
-    {label: "Irish cream"
-    },
-    {label: "Ale"
-    },
-    {label: "Chocolate liqueur"
-    },
-    {label: "Midori melon liqueur"
-    },
-    {label: "Sambuca"
-    },
-    {label: "Cider"
-    },
-    {label: "Sprite"
-    },
-    {label: "7-Up"
-    },
-    {label: "Blackberry brandy"
-    },
-    {label: "Peppermint schnapps"
-    },
-    {label: "Creme de Cassis"
-    }
-]
+  const glass = ["Highball glass","Cocktail glass","Old-fashioned glass","Whiskey Glass","Collins glass","Pousse cafe glass","Champagne flute","Whiskey sour glass","Cordial glass","Brandy snifter","White wine glass","Nick and Nora Glass","Hurricane glass","Coffee mug","Shot glass","Jar","Irish coffee cup","Punch bowl","Pitcher","Pint glass","Copper Mug","Wine Glass","Beer mug","Margarita/Coupette glass","Beer pilsner","Beer Glass","Parfait glass","Mason jar","Margarita glass","Martini Glass","Balloon Glass","Coupe Glass"]
 
   let displayAutoComplete;
   if (filter === 'c') {
     displayAutoComplete =
     <Autocomplete
     disablePortal
-    id="combo-box-demo"
     options={category}
     sx={{ width: 300 }}
+    onChange={handleSearch}
+    renderInput={(params) => <TextField {...params} label="Search" />}
+  />
+  } else if (filter === 'i') {
+    displayAutoComplete =
+    <Autocomplete
+    disablePortal
+    options={ingredient}
+    sx={{ width: 300}}
+    onChange={handleSearch}
+    renderInput={(params) => <TextField {...params} label="Search" />}
+  />
+  } else if (filter === 'g') {
+    displayAutoComplete =
+    <Autocomplete
+    disablePortal
+    options={glass}
+    sx={{ width: 300}}
+    onChange={handleSearch}
     renderInput={(params) => <TextField {...params} label="Search" />}
   />
   }
 
+  let displayGo;
+  if (go) {
+    displayGo = <Button onClick={handleGo}>Go!</Button>
+  }
+
+  let displayDrinksList;
+  if (drinkList.length > 0) {
+    displayDrinksList = drinkList.map((drink, i) => {
+      return (<SmallCard key={i} drink={drink}/>)
+    })
+  }
+
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', rowGap: 8, columnGap: 8, justifyContent: 'center' }}>
-      <FormControl sx={{ m: 1, maxWidth: 120 }}><InputLabel>Filter</InputLabel><Select  open={open}  onClose={handleClose}  onOpen={handleOpen}  value={filter}  label="Filter"  onChange={handleChange}>  <MenuItem value="">    <em>None</em>  </MenuItem>  <MenuItem value="c">Category</MenuItem>  <MenuItem value="i">Ingredient</MenuItem>  <MenuItem value="g">Glass</MenuItem></Select>
-      </FormControl>
+    <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
       <Box>
+      <FormControl sx={{ m: 1, minWidth: 100 }}>
+        <InputLabel>Filter</InputLabel>
+        <Select  open={open}  onClose={handleClose}  onOpen={handleOpen}  value={filter}  label="Filter" onChange={handleChange}>
+        <MenuItem value="      ">
+        <em>None</em></MenuItem>
+        <MenuItem value="c">Category</MenuItem>
+        <MenuItem value="i">Ingredient</MenuItem>
+        <MenuItem value="g">Glass</MenuItem></Select>
+      </FormControl>
+      </Box>
+      <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, justifyContent: 'center' }}>
       {displayAutoComplete}
       </Box>
+      <Box>{displayGo}</Box>
+      <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, justifyContent: 'center' }}>
+        {displayDrinksList}
+        </Box>
     </Box>
   );
 }

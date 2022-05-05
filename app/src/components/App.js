@@ -44,10 +44,10 @@ const App = () => {
     display = <List/>
   } else if (value === "Favorites") {
     display = (
-      <Box sx={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', rowGap: 5, columnGap: 8, "justify-content": 'center' }} >
+      <Box sx={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', rowGap: 5, columnGap: 8, justifyContent: 'center' }} >
         {/* <img src={cocktail} className="App-logo" alt="logo" /> */}
         <Typography variant='h5'>These are your favorite drinks!</Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, "justify-content": 'center' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, justifyContent: 'center' }}>
           {drinks.map((drink, i) => {
             return (<DrinkCard key={i} drink={drink} getfavorites={getfavorites}/>)
           })}
@@ -63,8 +63,8 @@ const App = () => {
   }
 
   return (
-    <div className="App">
-      <Box sx={{display: 'flex', flexDirection: 'row', "justify-content": 'center'}}>
+    <Box className="App" sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+      <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         <Typography variant='h1'>HomeBar</Typography>
         <LocalBarIcon sx={{fontSize: 100}} className="App-logo"/>
       </Box>
@@ -86,7 +86,7 @@ const App = () => {
         </Tabs>
       </Box>
       {display}
-    </div>
+    </Box>
   )
 
 }

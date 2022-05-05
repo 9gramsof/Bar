@@ -3,6 +3,7 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 class List extends React.Component {
   constructor(props) {
@@ -37,7 +38,9 @@ class List extends React.Component {
     let display;
     if (this.state.isSelected) {
       display = (
-        this.state.list.map((item, i) => {return <li key={i}>{item}</li>})
+        <Typography paragraph align="left">
+        {this.state.list.map((item, i) => {return <li key={i}>{item}</li>})}
+        </Typography>
       )
     }
     return (

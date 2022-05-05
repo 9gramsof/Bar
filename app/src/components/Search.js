@@ -110,7 +110,6 @@ const Search = () => {
       />
       <Button type="submit">Go!</Button>
     </Box>
-    <SmallCard/>
     <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', rowGap: 8, columnGap: 8, justifyContent: 'center' }}>{display}</Box>
     </Box>
   )
