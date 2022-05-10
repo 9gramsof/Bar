@@ -82,7 +82,7 @@ const App = () => {
           <Tab value="Search" label="Search" />
           <Tab value="Filter" label="Filter" />
           <Tab value="List" label="List" />
-
+          {/* <Tab value="Bar" label="Bar" /> */}
         </Tabs>
       </Box>
       {display}

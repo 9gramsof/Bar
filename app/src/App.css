@@ -8,6 +8,15 @@
   margin-bottom: 10px;
 }
 
+.RandomBox {
+  height: 10%;
+  width: 10%;
+  margin-left: 48%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+}
+
 .Random img {
   height: 10vmin;
   width: 10vmin;
